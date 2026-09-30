@@ -1,0 +1,44 @@
+site_name: Веб-программирование · Трикула Артём · K3341
+site_description: Отчёт по лабораторной работе №1 — работа с сокетами, UDP, TCP и HTTP.
+site_author: Трикула Артём
+site_url: https://asmoorr.github.io/ITMO_ICT_WebDevelopment_2026-2027/
+repo_url: https://github.com/Asmoorr/ITMO_ICT_WebDevelopment_2026-2027
+repo_name: Asmoorr/ITMO_ICT_WebDevelopment_2026-2027
+edit_uri: edit/main/students/k3341/Trikula_Artem/docs/
+docs_dir: students/k3341/Trikula_Artem/docs
+theme:
+  name: material
+  language: ru
+  font: false
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - toc.follow
+plugins:
+  - search:
+      lang: ru
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.snippets:
+      base_path:
+        - students/k3341/Trikula_Artem
+      check_paths: true
+  - toc:
+      permalink: true
+nav:
+  - Главная: index.md
+  - ЛР 1. Работа с сокетами:
+      - Обзор и запуск: lr1/report.md
+      - 1. Обмен по UDP: lr1/task1.md
+      - 2. Вычисления по TCP: lr1/task2.md
+      - 3. HTML по HTTP: lr1/task3.md
+      - 4. Многопользовательский чат: lr1/task4.md
+      - 5. Журнал оценок: lr1/task5.md
+      - Проверка и выводы: lr1/results.md
+  - Сборка и публикация: publishing.md

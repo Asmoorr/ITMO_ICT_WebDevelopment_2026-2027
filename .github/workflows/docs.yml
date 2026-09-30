@@ -1,0 +1,49 @@
+name: Publish MkDocs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - mkdocs.yml
+      - requirements-docs.txt
+      - .github/workflows/docs.yml
+      - students/k3341/Trikula_Artem/docs/**
+      - students/k3341/Trikula_Artem/Lr1/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'Asmoorr/ITMO_ICT_WebDevelopment_2026-2027'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+      - run: python -m pip install -r requirements-docs.txt
+      - run: python -m mkdocs build --strict
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

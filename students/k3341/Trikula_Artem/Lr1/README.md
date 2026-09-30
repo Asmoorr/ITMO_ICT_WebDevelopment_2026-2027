@@ -1,37 +1,59 @@
 # Лабораторная работа №1. Работа с сокетами
 
-Выполнены практические задания 1–3:
+**Трикула Артём, K3341.** Выполнены задания 1–5:
 
-1. обмен сообщениями по UDP;
-2. вычисление гипотенузы по теореме Пифагора через TCP (вариант 1 для №33 в журнале);
-3. раздача HTML-страницы по HTTP через TCP-сокет.
+1. Обмен приветствиями по UDP.
+2. Вычисление гипотенузы через TCP — вариант 1 для №33 в журнале.
+3. Раздача HTML-страницы через TCP-сокет по HTTP.
+4. Многопользовательский TCP-чат с потоками, именами и командой `/quit`.
+5. HTTP-сервер журнала оценок с GET/POST и сохранением в JSON.
 
-## Подготовка окружения
-
-Команды выполняются из корневого каталога `Trikula_Artem`. Конфигурация Poetry и
-локальное виртуальное окружение `.venv` находятся там же.
-
-```powershell
-poetry install
-```
-
-Poetry настроен на создание виртуального окружения в каталоге `.venv`.
+**[Открыть отчёт MkDocs](https://asmoorr.github.io/ITMO_ICT_WebDevelopment_2026-2027/)**
 
 ## Запуск
 
-Сначала запустите сервер нужного задания, затем в другом терминале — клиент.
+Нужен Python 3.10+. Внешние зависимости для самих приложений не требуются.
+Команды выполняются из `students/k3341/Trikula_Artem`.
+Сначала запустите сервер, затем клиент в другом терминале.
 
 ```powershell
 # Задание 1
-poetry run python Lr1/task1_udp/server.py
-poetry run python Lr1/task1_udp/client.py
+python Lr1/task1_udp/server.py
+python Lr1/task1_udp/client.py
 
 # Задание 2
-poetry run python Lr1/task2_tcp/server.py
-poetry run python Lr1/task2_tcp/client.py
+python Lr1/task2_tcp/server.py
+python Lr1/task2_tcp/client.py
 
-# Задание 3
-poetry run python Lr1/task3_http/server.py
+# Задание 3 — http://127.0.0.1:8080/
+python Lr1/task3_http/server.py
+
+# Задание 4 — каждый клиент в отдельном терминале
+python Lr1/task4_chat/server.py
+python Lr1/task4_chat/client.py --username Artem
+python Lr1/task4_chat/client.py --username Anna
+python Lr1/task4_chat/client.py --username Ivan
+
+# Задание 5 — http://127.0.0.1:8081/
+python Lr1/task5_grades/server.py
 ```
 
-Для задания 3 откройте в браузере <http://127.0.0.1:8080/>. Остановка серверов — `Ctrl+C`.
+При использовании Poetry выполните `poetry install` и добавляйте `poetry run` перед `python`.
+Сервер UDP завершится после одного обмена; остальные останавливаются через `Ctrl+C`.
+В чате для выхода введите `/quit`.
+
+`task5_grades/grades.json` создаётся при сохранении первой оценки и не включается в Git.
+
+## Документация
+
+Страницы отчёта находятся в [`../docs/`](../docs/index.md), конфигурация — в корневом `mkdocs.yml`.
+Из корня репозитория:
+
+```powershell
+python -m venv .venv-docs
+.venv-docs/Scripts/python -m pip install -r requirements-docs.txt
+.venv-docs/Scripts/python -m mkdocs serve
+```
+
+Публикация на GitHub Pages выполняется автоматически после push изменений в `main`.
+Подробности — в [инструкции по сборке](../docs/publishing.md).
