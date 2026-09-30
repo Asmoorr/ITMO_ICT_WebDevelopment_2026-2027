@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Журнал оценок</title>
+</head>
+<body>
+  <main>
+    <h1>Журнал оценок</h1>
+    <form action="/grades" method="post" accept-charset="UTF-8">
+      <p><label>Дисциплина <input name="subject" required maxlength="120"></label></p>
+      <p><label>Оценка <input name="grade" type="number" min="2" max="5" step="1" required></label></p>
+      <button type="submit">Добавить оценку</button>
+    </form>
+    <h2>Все оценки</h2>
+    <table>
+      <thead><tr><th scope="col">Дисциплина</th><th scope="col">Оценки</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+  </main>
+</body>
+</html>

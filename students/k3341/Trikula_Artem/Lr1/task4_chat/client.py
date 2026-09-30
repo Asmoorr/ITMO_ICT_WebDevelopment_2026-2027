@@ -28,7 +28,7 @@ def receive_loop(connection: socket.socket, stop_event: threading.Event,
         for message in receive_messages(connection):
             kind = message.get("type")
             if kind == "welcome":
-                print(f"Вы вошли как {message['username']}. Для выхода введите /quit.", flush=True)
+                print(f"* Вы вошли как {message['username']}. Для выхода введите /quit.", flush=True)
                 registered.set()
             elif kind == "chat":
                 print(f"[{message['username']}] {message['text']}", flush=True)
@@ -71,7 +71,9 @@ def run_client(host: str, port: int, username: str) -> None:
             if stop_event.is_set():
                 break
             if text == "/quit":
+                stop_event.set()
                 send_message(connection, {"type": "quit"}, send_lock)
+                print("* Вы вышли из чата", flush=True)
                 break
             if not text.strip():
                 continue
