@@ -4,8 +4,8 @@ site_author: Трикула Артём
 site_url: https://asmoorr.github.io/ITMO_ICT_WebDevelopment_2026-2027/
 repo_url: https://github.com/Asmoorr/ITMO_ICT_WebDevelopment_2026-2027
 repo_name: Asmoorr/ITMO_ICT_WebDevelopment_2026-2027
-edit_uri: edit/main/students/k3341/Trikula_Artem/docs/
-docs_dir: students/k3341/Trikula_Artem/docs
+edit_uri: edit/main/docs/
+docs_dir: docs
 theme:
   name: material
   language: ru

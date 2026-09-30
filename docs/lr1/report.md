@@ -32,7 +32,6 @@ cd ITMO_ICT_WebDevelopment_2026-2027/students/k3341/Trikula_Artem
 students/k3341/Trikula_Artem/
 ├── pyproject.toml
 ├── poetry.lock
-├── docs/                       # страницы отчёта
 └── Lr1/
     ├── README.md
     ├── task1_udp/              # server.py, client.py

@@ -71,6 +71,34 @@ python Lr1/task5_grades/server.py
 Откройте `http://127.0.0.1:8081/`. Введите дисциплину и оценку, нажмите «Добавить оценку».
 Повторите действие для того же предмета: в таблице должна остаться одна строка с двумя оценками.
 
+Те же запросы можно отправить из другого терминала:
+
+```powershell
+curl.exe -i --data "subject=Mathematics&grade=5" http://127.0.0.1:8081/grades
+curl.exe -i --data "subject=Mathematics&grade=4" http://127.0.0.1:8081/grades
+curl.exe -i http://127.0.0.1:8081/
+```
+
+На корректный POST сервер возвращает проверенный ответ:
+
+```http
+HTTP/1.1 303 See Other
+Location: /
+Server: GradesServer
+Content-Type: text/html; charset=utf-8
+Content-Length: 0
+Connection: close
+Cache-Control: no-store
+```
+
+После двух запросов в `grades.json` находится одна запись
+`{"Mathematics": [5, 4]}`. При перезапуске сервера обе оценки остаются в таблице.
+Оценка `6` приводит к `400 Bad Request`:
+
+```powershell
+curl.exe -i --data "subject=Mathematics&grade=6" http://127.0.0.1:8081/grades
+```
+
 ## Исходный код
 
 ??? note "task5_grades/http_server.py"

@@ -7,7 +7,7 @@ on:
       - mkdocs.yml
       - requirements-docs.txt
       - .github/workflows/docs.yml
-      - students/k3341/Trikula_Artem/docs/**
+      - docs/**
       - students/k3341/Trikula_Artem/Lr1/**
   workflow_dispatch:
 
