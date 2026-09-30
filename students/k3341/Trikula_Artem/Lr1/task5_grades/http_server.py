@@ -8,6 +8,7 @@ from urllib.parse import parse_qs
 
 
 TEMPLATES_PATH = Path(__file__).with_name("templates")
+PAGE_STYLES = (TEMPLATES_PATH / "styles.css").read_text(encoding="utf-8")
 ERROR_TEMPLATE = (TEMPLATES_PATH / "error.html").read_text(encoding="utf-8")
 
 
@@ -82,7 +83,7 @@ class MyHTTPServer:
             status = error.status if isinstance(error, HTTPError) else 400
             message = str(error) if isinstance(error, HTTPError) else "Некорректный запрос."
 
-            page = ERROR_TEMPLATE.format(status=status, message=escape(message))
+            page = ERROR_TEMPLATE.format(status=status, message=escape(message), styles=PAGE_STYLES)
             response = Response(status, page)
         except OSError as error:
             # Не выдаём ошибку сервера за неверный запрос или успешное сохранение.

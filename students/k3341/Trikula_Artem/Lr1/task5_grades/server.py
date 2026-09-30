@@ -5,7 +5,7 @@ from html import escape
 from pathlib import Path
 from urllib.parse import parse_qs
 
-from http_server import HTTPError, MyHTTPServer, Request, Response
+from http_server import HTTPError, MyHTTPServer, PAGE_STYLES, Request, Response
 
 
 HOST = "127.0.0.1"
@@ -14,7 +14,7 @@ DATA_PATH = Path(__file__).with_name("grades.json")
 TEMPLATES_PATH = Path(__file__).with_name("templates")
 
 GRADES_TEMPLATE = (TEMPLATES_PATH / "grades.html").read_text(encoding="utf-8")
-TEAPOT_PAGE = (TEMPLATES_PATH / "teapot.html").read_text(encoding="utf-8")
+TEAPOT_PAGE = (TEMPLATES_PATH / "teapot.html").read_text(encoding="utf-8").format(styles=PAGE_STYLES)
 ROW_TEMPLATE = "<tr><td>{subject}</td><td>{grades}</td></tr>"
 EMPTY_ROW = '<tr><td colspan="2">Оценок пока нет.</td></tr>'
 
@@ -90,7 +90,7 @@ def render_page(grades: dict[str, list[int]]) -> str:
     if not rows:
         rows = EMPTY_ROW
 
-    return GRADES_TEMPLATE.format(rows=rows)
+    return GRADES_TEMPLATE.format(rows=rows, styles=PAGE_STYLES)
 
 
 class GradesServer(MyHTTPServer):
