@@ -74,7 +74,6 @@ class MyHTTPServer:
         request = None
 
         try:
-            # Один буферизированный поток для заголовков и тела запроса.
             with connection.makefile("rb") as reader:
                 request = self.parse_request(reader)
 
@@ -86,7 +85,6 @@ class MyHTTPServer:
             page = ERROR_TEMPLATE.format(status=status, message=escape(message), styles=PAGE_STYLES)
             response = Response(status, page)
         except OSError as error:
-            # Не выдаём ошибку сервера за неверный запрос или успешное сохранение.
             print(f"Ошибка соединения или хранилища: {error}", file=sys.stderr)
             return
 
@@ -138,7 +136,6 @@ class MyHTTPServer:
             headers[name] = value.strip()
 
     def handle_request(self, request: Request) -> Response:
-        # Прикладной сервер переопределяет маршруты в наследнике.
         raise HTTPError(404, "Страница не найдена.")
 
     def send_response(self, connection: socket.socket, response: Response, head_only: bool = False) -> None:

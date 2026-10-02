@@ -116,7 +116,6 @@ class GradesServer(MyHTTPServer):
             updated = {name: values.copy() for name, values in self.grades.items()}
             updated.setdefault(subject, []).append(grade)
 
-            # При ошибке записи serve_client закроет соединение без подтверждения.
             save_grades(self.path, updated)
             self.grades = updated
 
