@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}Вход · Реестр{% endblock %}
+{% block content %}<h1>Войти в реестр</h1><p class="intro">Используйте логин и пароль своей учётной записи.</p><form method="post" class="panel form-panel">{% csrf_token %}{% include 'project_first_app/form_fields.html' %}<input type="hidden" name="next" value="{{ next }}"><button>Войти</button></form>{% endblock %}

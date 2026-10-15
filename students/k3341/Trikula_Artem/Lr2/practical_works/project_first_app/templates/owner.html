@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}{{ owner }} · Реестр{% endblock %}
+{% block content %}{% if user.is_staff %}<p><a href="{% url 'registry:owner_list' %}">Все владельцы</a></p>{% endif %}<h1>{{ owner }}</h1>
+<section class="panel"><h2>Данные владельца</h2><dl><dt>Имя</dt><dd>{{ owner.first_name }}</dd><dt>Фамилия</dt><dd>{{ owner.last_name }}</dd><dt>Дата рождения</dt><dd>{{ owner.birth_date|date:'d.m.Y'|default:'Не указана' }}</dd><dt>Логин</dt><dd>{{ owner.username }}</dd><dt>Паспорт</dt><dd>{{ owner.passport_number|default:"Не указан" }}</dd><dt>Домашний адрес</dt><dd>{{ owner.home_address|default:"Не указан" }}</dd><dt>Национальность</dt><dd>{{ owner.nationality|default:"Не указана" }}</dd></dl></section>
+<h2>История владения</h2>{% include 'project_first_app/ownership_table.html' %}
+<h2>Водительские удостоверения</h2><div class="table-scroll"><table><thead><tr><th>Номер</th><th>Категория</th><th>Дата выдачи</th></tr></thead><tbody>{% for license in owner.licenses.all %}<tr><td>{{ license.number }}</td><td>{{ license.get_category_display }}</td><td>{{ license.issued_on|date:'d.m.Y' }}</td></tr>{% empty %}<tr><td colspan="3">Удостоверения не добавлены.</td></tr>{% endfor %}</tbody></table></div>{% endblock %}

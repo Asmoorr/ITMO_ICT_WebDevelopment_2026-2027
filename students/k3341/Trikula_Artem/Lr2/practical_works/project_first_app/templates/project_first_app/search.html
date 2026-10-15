@@ -1,0 +1,1 @@
+<form class="search" method="get"><div class="field"><label for="search">Поиск</label><input id="search" name="q" value="{{ query }}" maxlength="100" placeholder="Введите имя, марку или номер"></div><button>Найти</button>{% if query %}<a href="{{ request.path }}">Сбросить</a>{% endif %}</form>

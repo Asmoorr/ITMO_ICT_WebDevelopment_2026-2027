@@ -1,0 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Реестр автомобилей{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'project_first_app/registry.css' %}"></head>
+<body><a class="skip" href="#content">Перейти к содержимому</a>
+<header><div class="wrap top"><a class="brand" href="{% url 'registry:home' %}">Реестр автомобилей</a>
+<nav aria-label="Основная навигация">{% if user.is_staff %}<a href="{% url 'registry:owner_list' %}">Владельцы</a>{% elif user.is_authenticated %}<a href="{{ user.get_absolute_url }}">Мой профиль</a>{% endif %}<a href="{% url 'registry:car_list' %}">Автомобили</a>
+{% if user.is_staff %}<a href="{% url 'admin:index' %}">Управление</a>{% endif %}
+{% if user.is_authenticated %}<span>{{ user.username }}</span><form class="inline" action="{% url 'logout' %}" method="post">{% csrf_token %}<button>Выйти</button></form>
+{% else %}<a href="{% url 'login' %}">Войти</a><a href="{% url 'registry:owner_create' %}">Регистрация</a>{% endif %}</nav></div></header>
+<main class="wrap" id="content">{% for message in messages %}<div class="notice" role="status">{{ message }}</div>{% endfor %}{% block content %}{% endblock %}</main>
+<footer><div class="wrap">Практики 2.1–2.3 · Трикула Артём, K3341. Все демонстрационные данные вымышлены.</div></footer></body></html>

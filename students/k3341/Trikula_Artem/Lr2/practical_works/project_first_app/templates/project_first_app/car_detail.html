@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}{{ car.brand }} {{ car.model_name }} · Реестр{% endblock %}
+{% block content %}<p><a href="{% url 'registry:car_list' %}">Все автомобили</a></p><div class="heading"><h1>{{ car.brand }} {{ car.model_name }}</h1>{% if user.is_staff %}<div class="actions"><a href="{% url 'registry:car_update' car.pk %}">Редактировать</a><a href="{% url 'registry:car_delete' car.pk %}">Удалить</a></div>{% endif %}</div>
+<section class="panel"><dl><dt>Государственный номер</dt><dd>{{ car.registration_number }}</dd><dt>Цвет</dt><dd>{{ car.color|default:'Не указан' }}</dd></dl></section>
+<h2>История владения</h2>{% include 'project_first_app/ownership_table.html' %}{% endblock %}

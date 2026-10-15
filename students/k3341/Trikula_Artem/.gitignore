@@ -1,7 +1,13 @@
 .venv/
+.env
+.env.*
+!.env.example
+Lr2/.runtime/
+.ruff_cache/
 __pycache__/
 *.py[cod]
 .idea/
 .vscode/
 Lr1/task5_grades/grades.json
 Lr1/task5_grades/grades.json.*.tmp
+!/TODO.md

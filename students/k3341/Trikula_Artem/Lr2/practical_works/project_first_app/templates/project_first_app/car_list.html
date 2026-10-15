@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block title %}Автомобили · Реестр{% endblock %}
+{% block content %}<div class="heading"><div><h1>Автомобили</h1><p class="muted">Марки, модели и история владельцев</p></div>{% if user.is_staff %}<a class="button" href="{% url 'registry:car_create' %}">Добавить автомобиль</a>{% endif %}</div>
+{% include 'project_first_app/search.html' %}<div class="table-scroll"><table><caption>Всего автомобилей: {{ page_obj.paginator.count }}</caption><thead><tr><th>Номер</th><th>Автомобиль</th><th>Цвет</th></tr></thead><tbody>{% for car in cars %}<tr><td><a href="{{ car.get_absolute_url }}">{{ car.registration_number }}</a></td><td>{{ car.brand }} {{ car.model_name }}</td><td>{{ car.color|default:'Не указан' }}</td></tr>{% empty %}<tr><td colspan="3">Автомобилей не найдено.</td></tr>{% endfor %}</tbody></table></div>{% include 'project_first_app/pagination.html' %}{% endblock %}

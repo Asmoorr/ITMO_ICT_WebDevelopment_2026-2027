@@ -1,0 +1,2 @@
+{% extends 'base.html' %}{% block title %}Удаление автомобиля · Реестр{% endblock %}
+{% block content %}<h1>Удалить автомобиль?</h1><div class="panel form-panel"><p>{{ object }}</p><p>Также будет удалена история владения этим автомобилем. Действие нельзя отменить.</p><form method="post">{% csrf_token %}<div class="actions"><button class="danger">Удалить автомобиль</button><a class="button secondary" href="{{ object.get_absolute_url }}">Отмена</a></div></form></div>{% endblock %}

@@ -219,3 +219,5 @@ __marimo__/
 
 # MkDocs local environment
 .venv-docs/
+
+.idea/

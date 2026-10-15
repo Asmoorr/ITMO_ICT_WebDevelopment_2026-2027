@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Владельцы · Реестр{% endblock %}
+{% block content %}<div class="heading"><div><h1>Владельцы</h1><p class="muted">Люди и история владения автомобилями</p></div><a class="button" href="{% url 'registry:owner_create' %}">Добавить владельца</a></div>
+{% include 'project_first_app/search.html' %}
+<div class="table-scroll"><table><caption>Всего владельцев: {{ page_obj.paginator.count }}</caption><thead><tr><th scope="col">Владелец</th><th scope="col">Дата рождения</th><th scope="col">Карточка</th></tr></thead><tbody>
+{% for owner in page_obj %}<tr><td>{{ owner }}</td><td>{{ owner.birth_date|date:'d.m.Y'|default:'Не указана' }}</td><td><a href="{{ owner.get_absolute_url }}">Открыть</a></td></tr>{% empty %}<tr><td colspan="3">Владельцев не найдено. Измените поисковый запрос.</td></tr>{% endfor %}</tbody></table></div>
+{% include 'project_first_app/pagination.html' %}{% endblock %}

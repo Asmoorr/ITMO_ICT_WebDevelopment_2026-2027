@@ -1,5 +1,5 @@
 site_name: Веб-программирование · Трикула Артём · K3341
-site_description: Отчёт по лабораторной работе №1 — работа с сокетами, UDP, TCP и HTTP.
+site_description: Отчёты по веб-программированию — сокеты и практики Django.
 site_author: Трикула Артём
 site_url: https://asmoorr.github.io/ITMO_ICT_WebDevelopment_2026-2027/
 repo_url: https://github.com/Asmoorr/ITMO_ICT_WebDevelopment_2026-2027
@@ -41,4 +41,9 @@ nav:
       - 4. Многопользовательский чат: lr1/task4.md
       - 5. Журнал оценок: lr1/task5.md
       - Проверка и выводы: lr1/results.md
+  - ЛР 2. Практики Django:
+      - Обзор и проверка: lr2/report.md
+      - 2.1. Первый проект: lr2/task1.md
+      - 2.2. Представления и формы: lr2/task2.md
+      - 2.3. Пользователь-владелец: lr2/task3.md
   - Сборка и публикация: publishing.md

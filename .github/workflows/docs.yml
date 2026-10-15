@@ -8,7 +8,7 @@ on:
       - requirements-docs.txt
       - .github/workflows/docs.yml
       - docs/**
-      - students/k3341/Trikula_Artem/Lr1/**
+      - students/k3341/Trikula_Artem/**
   workflow_dispatch:
 
 permissions:
