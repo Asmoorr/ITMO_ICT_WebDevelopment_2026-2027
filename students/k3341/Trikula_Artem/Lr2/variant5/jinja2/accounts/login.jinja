@@ -1,0 +1,3 @@
+{% extends 'base.jinja' %}{% from 'fields.jinja' import field_row, form_errors %}
+{% block title %}Вход · Конференции{% endblock %}
+{% block content %}<div class="form-heading"><h1>С возвращением</h1><p class="muted">Войдите, чтобы подать заявку и следить за результатами выступлений.</p></div><form method="post" class="surface form-surface">{{ csrf_input }}{{ form_errors(form) }}{% for field in form %}{{ field_row(field) }}{% endfor %}<input type="hidden" name="next" value="{{ next }}"><button>Войти</button><p>Ещё нет аккаунта? <a href="{{ url('accounts:signup') }}">Зарегистрироваться</a></p></form>{% endblock %}

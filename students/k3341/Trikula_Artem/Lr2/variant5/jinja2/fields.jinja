@@ -1,0 +1,2 @@
+{% macro field_row(field) %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span aria-label="обязательное поле"> *</span>{% endif %}</label>{{ field }}{% if field.help_text %}<div class="help">{{ field.help_text|safe }}</div>{% endif %}{% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}</div>{% endmacro %}
+{% macro form_errors(form) %}{% for error in form.non_field_errors() %}<div class="error-box" role="alert">{{ error }}</div>{% endfor %}{% endmacro %}

@@ -1,5 +1,5 @@
 site_name: Веб-программирование · Трикула Артём · K3341
-site_description: Отчёты по веб-программированию — сокеты и практики Django.
+site_description: Отчёты по веб-программированию — сокеты, практики Django и научные конференции.
 site_author: Трикула Артём
 site_url: https://asmoorr.github.io/ITMO_ICT_WebDevelopment_2026-2027/
 repo_url: https://github.com/Asmoorr/ITMO_ICT_WebDevelopment_2026-2027
@@ -46,4 +46,9 @@ nav:
       - 2.1. Первый проект: lr2/task1.md
       - 2.2. Представления и формы: lr2/task2.md
       - 2.3. Пользователь-владелец: lr2/task3.md
+  - ЛР 2. Вариант 5:
+      - Обзор и проверка: lr2/variant5/report.md
+      - Модель данных: lr2/variant5/models.md
+      - Представления и правила: lr2/variant5/implementation.md
+      - Шаблоны и оформление: lr2/variant5/templates.md
   - Сборка и публикация: publishing.md

@@ -1,0 +1,4 @@
+{% extends 'base.jinja' %}{% from 'fields.jinja' import field_row, form_errors %}
+{% block title %}{{ title }} · Конференции{% endblock %}
+{% block content %}<div class="form-heading"><a class="back-link" href="{{ cancel_url or url('conferences:catalog') }}">Назад</a><h1>{{ title }}</h1><p class="muted">Поля со звёздочкой обязательны для заполнения.</p></div>
+<form method="post" class="surface form-surface">{{ csrf_input }}{{ form_errors(form) }}{% for field in form %}{{ field_row(field) }}{% endfor %}<div class="actions"><button>{{ submit_label or 'Сохранить' }}</button><a class="button secondary" href="{{ cancel_url or url('conferences:catalog') }}">Отмена</a></div></form>{% endblock %}
