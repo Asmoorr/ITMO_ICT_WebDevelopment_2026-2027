@@ -1,5 +1,3 @@
-"""Repeatable fictional records; never deletes or resets existing user data."""
-
 import os
 from datetime import date
 

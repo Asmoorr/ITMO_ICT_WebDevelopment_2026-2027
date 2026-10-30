@@ -4,10 +4,10 @@
 <title>{% block title %}Реестр автомобилей{% endblock %}</title>
 <link rel="stylesheet" href="{% static 'project_first_app/registry.css' %}"></head>
 <body><a class="skip" href="#content">Перейти к содержимому</a>
-<header><div class="wrap top"><a class="brand" href="{% url 'registry:home' %}">Реестр автомобилей</a>
+<header><div class="wrap top"><a class="brand" href="{% url 'registry:home' %}"><span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18.92 6.01A1.5 1.5 0 0 0 17.5 5h-11c-.66 0-1.22.42-1.42 1.01L3 12v8a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h12v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-8l-2.08-5.99ZM6.5 16A1.5 1.5 0 1 1 6.5 13a1.5 1.5 0 0 1 0 3Zm11 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3ZM5 11l1.5-4.5h11L19 11H5Z"/></svg></span>Реестр автомобилей</a>
 <nav aria-label="Основная навигация">{% if user.is_staff %}<a href="{% url 'registry:owner_list' %}">Владельцы</a>{% elif user.is_authenticated %}<a href="{{ user.get_absolute_url }}">Мой профиль</a>{% endif %}<a href="{% url 'registry:car_list' %}">Автомобили</a>
 {% if user.is_staff %}<a href="{% url 'admin:index' %}">Управление</a>{% endif %}
 {% if user.is_authenticated %}<span>{{ user.username }}</span><form class="inline" action="{% url 'logout' %}" method="post">{% csrf_token %}<button>Выйти</button></form>
 {% else %}<a href="{% url 'login' %}">Войти</a><a href="{% url 'registry:owner_create' %}">Регистрация</a>{% endif %}</nav></div></header>
 <main class="wrap" id="content">{% for message in messages %}<div class="notice" role="status">{{ message }}</div>{% endfor %}{% block content %}{% endblock %}</main>
-<footer><div class="wrap">Практики 2.1–2.3 · Трикула Артём, K3341. Все демонстрационные данные вымышлены.</div></footer></body></html>
+</body></html>

@@ -1,5 +1,3 @@
-"""Create fictional conference data without resetting existing passwords."""
-
 import os
 from datetime import timedelta
 

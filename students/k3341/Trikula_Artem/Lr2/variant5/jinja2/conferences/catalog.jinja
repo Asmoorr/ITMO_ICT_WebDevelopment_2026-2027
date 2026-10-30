@@ -1,6 +1,45 @@
-{% extends 'base.jinja' %}{% from 'fields.jinja' import field_row, form_errors %}
-{% block content %}<div class="page-heading"><div><h1>Научные конференции</h1><p class="lead">Найдите площадку для своего исследования.<br>Выберите тему и подайте заявку на выступление.</p></div>{% if request.user.has_perm('conferences.add_conference') %}<a class="button" href="{{ url('conferences:conference_create') }}">Добавить конференцию</a>{% endif %}</div>
-<div class="catalog-layout"><aside class="filters surface"><h2>Найти конференцию</h2><form method="get">{{ form_errors(form) }}{% for field in form %}{{ field_row(field) }}{% endfor %}<button class="full-width">Показать</button><a class="reset-link" href="{{ url('conferences:catalog') }}">Сбросить фильтры</a></form></aside>
-<section aria-label="Список конференций"><p class="result-count">Найдено конференций: <strong>{{ page.paginator.count }}</strong></p><div class="conference-list">
-{% for conference in page %}<article class="conference-row surface"><div class="date-panel"><span class="date-day">{{ conference.start_date.day }}</span><span>{{ conference.start_date|date }}</span><span class="muted">{{ conference.venue.city }}</span></div><div class="conference-summary"><div class="tags">{% for topic in conference.topics.all() %}<span class="tag">{{ topic.name }}</span>{% endfor %}</div><h2><a href="{{ conference.get_absolute_url() }}">{{ conference.title }}</a></h2><p class="muted">{{ conference.description|truncate(170) }}</p><div class="event-meta"><span class="phase {% if conference.finished %}finished{% endif %}">{{ conference.phase }}</span><span>{{ conference.start_date|date }} — {{ conference.end_date|date }}</span>{% if conference.average_rating is not none %}<span>Оценка {{ '%.1f'|format(conference.average_rating) }}/10</span>{% endif %}</div></div></article>
-{% else %}<div class="surface empty"><h2>Конференций не найдено</h2><p>Попробуйте другую тему или сбросьте фильтры.</p><a href="{{ url('conferences:catalog') }}">Показать все конференции</a></div>{% endfor %}</div>{% include 'pagination.jinja' %}</section></div>{% endblock %}
+{% extends 'base.jinja' %}
+{% from 'fields.jinja' import field_row, form_errors %}
+{% block content %}
+<div class="page-heading">
+  <h1>Научные конференции</h1>
+  {% if request.user.has_perm('conferences.add_conference') %}<a class="button" href="{{ url('conferences:conference_create') }}">Добавить конференцию</a>{% endif %}
+</div>
+<div class="catalog-layout">
+  <aside class="filters surface" aria-labelledby="filter-title">
+    <h2 id="filter-title">Найти конференцию</h2>
+    <form method="get">
+      {{ form_errors(form) }}
+      {% for field in form %}{{ field_row(field) }}{% endfor %}
+      <button class="full-width">Показать конференции</button>
+      <a class="reset-link" href="{{ url('conferences:catalog') }}">Сбросить фильтры</a>
+    </form>
+  </aside>
+  <section aria-label="Список конференций">
+    <p class="result-count">Найдено конференций: <strong>{{ page.paginator.count }}</strong></p>
+    <div class="conference-list">
+      {% for conference in page %}
+      <article class="conference-card" aria-labelledby="conference-{{ conference.pk }}">
+        <div class="conference-card-top">
+          <span class="event-status {% if conference.finished %}is-finished{% elif not conference.registration_open %}is-current{% endif %}">{{ conference.phase }}</span>
+          {% if conference.average_rating is not none %}<span class="event-rating">Оценка <strong>{{ '%.1f'|format(conference.average_rating) }}</strong> / 10</span>{% endif %}
+        </div>
+        <h2 id="conference-{{ conference.pk }}">{{ conference.title }}</h2>
+        <div class="conference-facts">
+          <div><span class="fact-label">Когда</span><span><time datetime="{{ conference.start_date.isoformat() }}">{{ conference.start_date|date }}</time> — <time datetime="{{ conference.end_date.isoformat() }}">{{ conference.end_date|date }}</time></span></div>
+          <div><span class="fact-label">Где</span><span>{{ conference.venue.city }}<span class="venue-name">{{ conference.venue.name }}</span></span></div>
+        </div>
+        <div class="tags">{% for topic in conference.topics.all() %}<span class="tag">{{ topic.name }}</span>{% endfor %}</div>
+        <div class="conference-card-actions">
+          <span class="registration-deadline">{% if conference.registration_open %}Заявки принимаются до начала конференции{% elif conference.finished %}Доступны итоги и отзывы{% else %}Приём заявок закрыт{% endif %}</span>
+          <a class="button secondary" href="{{ conference.get_absolute_url() }}" aria-label="Подробнее о конференции «{{ conference.title }}»">Подробнее <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      {% else %}
+      <div class="surface empty"><h2>Конференций не найдено</h2><p>Попробуйте другую тему или сбросьте фильтры.</p><a href="{{ url('conferences:catalog') }}">Показать все конференции</a></div>
+      {% endfor %}
+    </div>
+    {% include 'pagination.jinja' %}
+  </section>
+</div>
+{% endblock %}
